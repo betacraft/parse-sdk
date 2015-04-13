@@ -12,7 +12,7 @@ const (
 
 func TestSendPushNotification(t *testing.T) {
 	sdk := Init(AppId, RestApiKey)
-	err := sdk.SendToObjectId(ObjectId, map[string]interface{}{"data": "test"})
+	err := sdk.SendAlertTo(ObjectId, map[string]interface{}{"alert": "Via golang sdk"})
 	if err != nil {
 		t.Error(err)
 	}

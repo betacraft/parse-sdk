@@ -20,7 +20,7 @@ func Init(applicationId string, restApiKey string) *ParseSdk {
 func (p *ParseSdk) send(url *string, content *[]byte) error {
 	client := &http.Client{}
 	log.Println("Sending to", url)
-	req, err := http.NewRequest("PUT", *url, bytes.NewBuffer(*content))
+	req, err := http.NewRequest("POST", *url, bytes.NewBuffer(*content))
 	req.Header.Add("X-Parse-Application-Id", p.applicationId)
 	req.Header.Add("X-Parse-REST-API-Key", p.restApiKey)
 	req.Header.Add("Content-Type", "application/json")
@@ -51,12 +51,12 @@ func (p *ParseSdk) SendTo(message map[string]interface{}) error {
 	return p.send(&url, &content)
 }
 
-func (p *ParseSdk) SendToObjectId(objectId string, message map[string]interface{}) error {
-	data := map[string]interface{}{"data": message, "where": map[string]interface{}{"objectId": objectId}}
+func (p *ParseSdk) SendAlertToObjectId(objectId string, message map[string]interface{}) error {
+	data := map[string]interface{}{"alert": message, "where": map[string]interface{}{"objectId": objectId}}
 	content, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
-	url := "https://api.parse.com/1/installations/" + objectId
+	url := "https://api.parse.com/1/push"
 	return p.send(&url, &content)
 }
