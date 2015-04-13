@@ -5,9 +5,9 @@ import (
 )
 
 const (
-	ObjectId   = "2nbM0lyLAb"
-	AppId      = "DoymS4OxgNxvSAosUSUxshEHLI9tLec0XOZuGNm3"
-	RestApiKey = "m4i58Jq8PfJpu9skFDHe7PXQduACa91c1FLL8uZf"
+	ObjectId   = "-"
+	AppId      = "-"
+	RestApiKey = "-"
 )
 
 func TestSendPushNotification(t *testing.T) {
