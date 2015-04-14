@@ -51,8 +51,18 @@ func (p *ParseSdk) SendTo(message map[string]interface{}) error {
 	return p.send(&url, &content)
 }
 
-func (p *ParseSdk) SendAlertToObjectId(objectId string, message map[string]interface{}) error {
-	data := map[string]interface{}{"alert": message, "where": map[string]interface{}{"objectId": objectId}}
+func (p *ParseSdk) SendDataToObjectId(objectId string, data map[string]interface{}) error {
+	parseData := map[string]interface{}{"data": data, "where": map[string]interface{}{"objectId": objectId}}
+	content, err := json.Marshal(parseData)
+	if err != nil {
+		return err
+	}
+	url := "https://api.parse.com/1/push"
+	return p.send(&url, &content)
+}
+
+func (p *ParseSdk) SendAlertToObjectId(objectId string, message string) error {
+	data := map[string]interface{}{"data": map[string]interface{}{"alert": message}, "where": map[string]interface{}{"objectId": objectId}}
 	content, err := json.Marshal(data)
 	if err != nil {
 		return err
