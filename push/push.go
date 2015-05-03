@@ -19,7 +19,7 @@ func Init(applicationId string, restApiKey string) *ParseSdk {
 
 func (p *ParseSdk) send(url *string, content *[]byte) error {
 	client := &http.Client{}
-	log.Println("Sending to", url)
+	log.Println("Sending to", *url)
 	req, err := http.NewRequest("POST", *url, bytes.NewBuffer(*content))
 	req.Header.Add("X-Parse-Application-Id", p.applicationId)
 	req.Header.Add("X-Parse-REST-API-Key", p.restApiKey)
